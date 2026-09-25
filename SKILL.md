@@ -1,20 +1,20 @@
 ---
 name: debate-defense-coach
-display_name: è®ºè¾©æ»é²å©æï¼è¯¡è¾©è¯å«Ãåé©³æ¹æ³ï¼
+display_name: 论辩攻防助手（诡辩识别×反驳方法）
 aliases:
-  - è®ºè¾©æ»é²å©æ
-  - è¯¡è¾©è¯å«
-  - è¯¡è¾©ä¸åé©³
-  - åæ¼æç»
+  - 论辩攻防助手
+  - 诡辩识别
+  - 诡辩与反驳
+  - 反怼教练
   - debate-defense-coach
 description: |
-  åºäºãè¯¡è¾©ä¸åé©³ãï¼éç¿¼æµ¦ï¼è¸é¦çè®ºè¾©æè½åãå½ç¨æ·æ³è¯å«ä¸æ®µå¯¹è¯/æç« ä¸­çè¯¡è¾©ææ³
-  ï¼å·æ¢æ¦å¿µãå¤æé®è¯­ãä»¥åæ¦å¨ãäººèº«æ»å»ç­27ç§ï¼ï¼ææ³ç¥éå¦ä½åé©³æä¸ªè¯´æ³ã
-  å¯¹æ¹æ¯å¦å¨è½¬ç§»è¯é¢/è·é¢/å·æ¢è®ºé¢æ¶ä½¿ç¨ãæ¯æ"è®ºè¾©å®æéªç»"ï¼ç¨æ·è¯´"æ¥ç»ç»/éªç»/
-  å®ææ¼ç»/èèæ"ï¼AI æ®æ¼è¯¡è¾©å¯¹æåºæï¼ç¨æ·å®ææ¥æï¼AI æè½åå¡å¤å·å¤çã
-  è§¦åè¯ï¼è¯å«è¯¡è¾©ãè¿æ¯ä»ä¹é»è¾éè¯¯ãæä¹åé©³ãä»æ¯ä¸æ¯å¨å·æ¢æ¦å¿µ/ç»æä¸å¥/äººèº«æ»å»/
-  è½¬ç§»è¯é¢ãææè¾©è®ºãæ¥ç»ç»ãéªç»ãèèæï¼sophistry detection, logical fallacy,
-  how to rebut, sparringï¼ãä¸éç¨äºï¼çº¯æç»ªå¾è¯ãéè®ºè¯æ§çé²èãéè¦äºå®æ¥è¯èéé»è¾åæçæ¥è¯¢ã
+  基于《诡辩与反驳》（陈翼浦）蒸馏的论辩技能包。当用户想识别一段对话/文章中的诡辩手法
+  （偷换概念、复杂问语、以偏概全、人身攻击等27种），或想知道如何反驳某个说法、
+  对方是否在转移话题/跑题/偷换论题时使用。支持"论辩实战陪练"：用户说"来练练/陪练/
+  实战演练/考考我"，AI 扮演诡辩对手出招，用户实战接招，AI 按能力卡判卷复盘。
+  触发词：识别诡辩、这是什么逻辑错误、怎么反驳、他是不是在偷换概念/给我下套/人身攻击/
+  转移话题、教我辩论、来练练、陪练、考考我（sophistry detection, logical fallacy,
+  how to rebut, sparring）。不适用于：纯情绪倾诉、非论证性的闲聊、需要事实查证而非逻辑分析的查询。
 version: 1.1.1
 visibility: public
 agent_created: true
@@ -28,80 +28,80 @@ metadata:
   cangjie.capability-count: 35
   cangjie.entrypoint-count: 1
 ---
-# è¯¡è¾©ä¸åé©³ â å¨ä¹¦è½åå¥å£
+# 诡辩与反驳 — 全书能力入口
 
-## è§¦åä¸ä¸è§¦å
+## 触发与不触发
 
-**éç¨**ï¼ä¸æ¬ä¹¦è½ååç¸å³çå¨è¯¢ä¸ä»»å¡ï¼è§ä¸æ¹è·¯ç±è¡¨çæå¾åï¼ã
-**ä¸éç¨**ï¼
-- çº¯æç»ªå¾è¯ä¸é²èï¼æ è®ºè¯ç»æï¼
-- äºå®æ°æ®æ¥è¯¢ä¸æ ¸éªï¼åºæ¥æ°æ®æºï¼éé»è¾åæï¼
-- æå­¦å®¡ç¾ãä¸ªäººåå¥½ç­éè®ºè¯å¤æ­
-- å¿çå­¦è¯æ­æäººéææå¨è¯¢
+**适用**：与本书能力域相关的咨询与任务（见下方路由表的意图列）。
+**不适用**：
+- 纯情绪倾诉与闲聊（无论证结构）
+- 事实数据查询与核验（应查数据源，非逻辑分析）
+- 文学审美、个人偏好等非论证判断
+- 心理学诊断或人际情感咨询
 
-## æ ¸å¿ååï¼å¸¸é©»éè§ï¼æ¦è§ç±»é®é¢è¯»å°è¿éå³å¯åç­ï¼
+## 核心原则（常驻速览，概览类问题读到这里即可回答）
 
-1. è¯¡è¾©=ç®ç+ææ®µåç¹å¾è¦åï¼è¯å«åå¤"ææè¿è§+æå¡ç®ç"ï¼ä¸çº ç¼ è¡¨é¢è¨è¾
-2. è®ºè¯çºªå¾ä¸æ¡å®ªæ³ï¼æ¦å¿µä¸å·æ¢ãè®ºé¢ä¸è½¬ç§»ãæ­å®ä¸çç¾
-3. è®ºæ®è´¨éä¸é®ï¼çå®ï¼éåéª/æé /å¾ªç¯ï¼ãç¸å³ï¼éæ å³/æç¶ï¼ãååï¼éä»¥åæ¦å¨ï¼
-4. åé©³éå¨ååï¼æ­ªæ²äºå®ç¨çç¸åé©³/å®è¯ï¼èªç¸çç¾ç¨ä»¥çæ»ç¾ï¼èè°¬è®ºé¢ç¨å½è°¬/äºé¾ï¼æå¨åäººç¨é©³è¿·ä¿¡æå¨
-5. èªå®ç¬¬ä¸ï¼åªåé©³è§ç¹ä¸è¯ä»·äººï¼ä¸é¢è®¾é·é±é®å¥ï¼åè¨åè¿é²å¾¡èªæ¥æ¸å
+1. 诡辩=目的+手段双特征耦合：识别先判"有意违规+服务目的"，不纠缠表面言辞
+2. 论证纪律三条宪法：概念不偷换、论题不转移、断定不矛盾
+3. 论据质量三问：真实（非先验/捏造/循环）、相关（非无关/或然）、充分（非以偏概全）
+4. 反驳选器原则：歪曲事实用真相反驳/实证；自相矛盾用以矛攻盾；荒谬论题用归谬/二难；权威压人用驳迷信权威
+5. 自守第一：只反驳观点不评价人；不预设陷阱问句；发言前过防御自查清单
 
-## è½åè·¯ç±ï¼åè¯»æ¬è¡¨ï¼ææå¾å è½½ 1 å¼ è½åå¡ï¼
+## 能力路由（先读本表，按意图加载 1 张能力卡）
 
-| ç¨æ·æå¾ | åè¯» | è¡¥è¯»/å¤æ³¨ |
+| 用户意图 | 先读 | 补读/备注 |
 |---|---|---|
-| è¯å«è¯¡è¾©ï¼åæå¯¹è¯é»è¾ï¼å­¦ä¹ è¾©è®ºï¼å­¦ä¹ åé©³ï¼è¯æ¯åæï¼é»è¾è°¬è¯¯è¯å« | references/capabilities/gui-bian-yu-fan-bo-debate-coach.md | â |
-| è¯å«è¯¡è¾©ï¼å¤æ­æ¯å¦å¨è¯¡è¾©ï¼æ£æµé»è¾éè¯¯ï¼å¹¿åè¯æ¯åæï¼èè®ºè¯æ¯è¯å« | references/capabilities/sophistry-detection.md | references/capabilities/argument-vs-reasoning.md |
-| ç ´è§£å¥è¯ï¼è¯å«é·é±é®é¢ï¼åºå¯¹è®°èæé®ï¼åºå¯¹å®¡è®¯å¼æé®ï¼ä¸ä¸­åå¥ | references/capabilities/complex-question-defense.md | references/capabilities/transference.mdãreferences/capabilities/excluded-middle.md |
-| è®ºè¯è´¨éè¯ä¼°ï¼æ£æ¥è®ºç¹æ¯å¦æç«ï¼å®¡ç¨¿ï¼å³ç­åéªè¯ï¼è¯ä¼°å«äººè¯´æ³é ä¸é è°± | references/capabilities/evidence-triple-check.md | references/capabilities/evidence-truth.mdãreferences/capabilities/evidence-relevance.mdãreferences/capabilities/evidence-sufficiency.md |
-| åºå¯¹äººèº«æ»å»ï¼ç½ç»è®ºæï¼é¿åè¢«å¸¦åï¼æç»ªè¯æ¯åç«ï¼åå¶è°©éª | references/capabilities/ad-hominem-immunity.md | references/capabilities/thesis-identity.md |
-| æ­é²èªç¸çç¾ï¼åºå¯¹ååä¸ä¸ï¼æé»è¾æ¼æ´ï¼åé©³çç¾è¨è®º | references/capabilities/contradiction-exposure.md | references/capabilities/contradiction-scan.mdãreferences/capabilities/truth-rebuttal.md |
-| æé ä¸¤é¾ï¼è¾©è®ºææéï¼è°å¤é³å¶ï¼å°æ­»å¯¹æ¹ï¼è®¾ç½®è¿éä¸¤é¾ | references/capabilities/dilemma-construction.md | references/capabilities/reductio-absurdum.mdãreferences/capabilities/excluded-middle.md |
-| ç¨å½è°¬åé©³ï¼ä»¥èè°¬è¯èè°¬ï¼é«æ®µä½æ¼äººï¼å¼ç³åé©³ï¼é´é³æªæ°åå» | references/capabilities/reductio-absurdum.md | references/capabilities/return-folly.mdãreferences/capabilities/dilemma-construction.md |
-| å®æéªç»ï¼è¾©è®ºç»ä¹ ï¼è¯å«ç»ä¹ ï¼åé©³ç»ä¹ ï¼èèæï¼æ¥ç»ç»ï¼åºæ¯æ¼ç» | references/capabilities/sparring-mode.md | references/capabilities/sophistry-detection.md |
-| éæ©å®¡æ¥æ åï¼å¤æ­è®ºè¯è¿æ¯æ¨ç | references/capabilities/argument-vs-reasoning.md | references/capabilities/sophistry-detection.md |
-| ç»æ­¢è¯ä¹ä¹äºï¼å¤æ­è¯´æ³æ¯å¦åä¸ï¼æç©¿å¬æå¼å­ | references/capabilities/fact-adjudicates-language.md | references/capabilities/concept-identity.md |
-| è¯å«æ­ç« åä¹ï¼æ£æ¥è¯­å¢è¶çï¼å¼ç¨æ ¸æ¥ | references/capabilities/context-guard.md | references/capabilities/thesis-identity.md |
-| è¯å«å·æ¢æ¦å¿µï¼æ£æ¥æ¦å¿µæ¼ç§»ï¼åæ¦å¿µææ¥ | references/capabilities/concept-identity.md | references/capabilities/fact-adjudicates-language.md |
-| è¯å«å·æ¢è®ºé¢ï¼æåè¯é¢ï¼ä¼è®®æ§åºï¼è¯å«ç­éæé® | references/capabilities/thesis-identity.md | references/capabilities/concept-identity.md |
-| åç°èªç¸çç¾ï¼è¯å«è¨è¡ä¸ä¸ï¼å®¡è®¯å¼è¿½é® | references/capabilities/contradiction-scan.md | references/capabilities/contradiction-exposure.md |
-| è¯å«åé¿è¡¨æï¼é¼å¯¹æ¹è¡¨æï¼æç©¿åç¨æ³¥ | references/capabilities/excluded-middle.md | references/capabilities/dilemma-construction.md |
-| æ£æ¥è®ºæ®çåï¼è¯å«å¾ªç¯è®ºè¯ï¼è¯å«åéªçç±ï¼è¯å«ä¼ªè¯ | references/capabilities/evidence-truth.md | references/capabilities/evidence-triple-check.md |
-| æ£æ¥è®ºè¯ç¸å³æ§ï¼è¯å«æ å³æ¨è®ºï¼è¯å«å¼ºä¸ºå æ | references/capabilities/evidence-relevance.md | references/capabilities/evidence-triple-check.md |
-| è¯å«ä»¥åæ¦å¨ï¼æ£æ¥æ ·æ¬ä»£è¡¨æ§ï¼é²åä¸æ¡ä¾ | references/capabilities/evidence-sufficiency.md | references/capabilities/evidence-triple-check.md |
-| æ ¸æ¥æå¨å¼ç¨ï¼è¯å«æ»¥ç¨æå¨ï¼ä¸å®¶è¯´æ³éªè¯ | references/capabilities/authority-relativity.md | references/capabilities/anti-authority-worship.md |
-| è¯å«ç½æè¯æ¯ï¼é²æç»ªç»æ¶ï¼çæ§è´­ç©ï¼è¯å«ä»¥æä»£è¯ | references/capabilities/emotion-logic-separation.md | references/capabilities/ad-hominem-immunity.md |
-| è¯å«ä¸å½ç±»æ¯ï¼æç©¿æ¯å»è®ºè¯ï¼ç±»æ¯æ£æ¥ | references/capabilities/analogy-metaphor-check.md | references/capabilities/analogy-rebuttal.mdãreferences/capabilities/metaphor-rebuttal.md |
-| æ­é²æ··æ·ï¼æ¾æ¸æ¦å¿µï¼æè§£æ­§ä¹ | references/capabilities/distinction-method.md | references/capabilities/concept-identity.md |
-| å·§å¦åºç­ï¼åé¢åæ¥ï¼ä¸ä¸­å¥ä½ç­ï¼åå®¢ä¸ºä¸» | references/capabilities/transference.md | references/capabilities/complex-question-defense.md |
-| è¯­è¨åå»ï¼å·§ç¨æ­§ä¹ï¼ä¿®è¾åé©³ | references/capabilities/words-as-weapon.md | references/capabilities/fact-adjudicates-language.md |
-| æè§£å¤æè®ºæ­ï¼åèæ²»ä¹åé©³ï¼å¤ç»´åæ | references/capabilities/dissection.md | references/capabilities/comparison.mdãreferences/capabilities/evidence-triple-check.md |
-| å¯¹æ¯åé©³ï¼ç¨åç§ç©è¯´æï¼æ¾å·®å« | references/capabilities/comparison.md | references/capabilities/factual-rebuttal.md |
-| ç±»æ¯åé©³ï¼åç±»æ¯ï¼åç±»æ¨è°¬ | references/capabilities/analogy-rebuttal.md | references/capabilities/analogy-metaphor-check.md |
-| ç¨æ¯å»åé©³ï¼è¯±é®å¼åé©³ï¼è¯´æåºæ§è | references/capabilities/metaphor-rebuttal.md | references/capabilities/analogy-rebuttal.mdãreferences/capabilities/analogy-metaphor-check.md |
-| ç¨äºå®åé©³ï¼æäºå®ï¼è¯æ®é©³æ¥ | references/capabilities/factual-rebuttal.md | references/capabilities/truth-rebuttal.md |
-| å½åºæ¼ç¤ºåé©³ï¼è¡ä¸ºè¯æï¼æè¡ä¸ºä½æ® | references/capabilities/behavioral-rebuttal.md | references/capabilities/factual-rebuttal.md |
-| è¾è°£ï¼èªè¯æ¸ç½ï¼æ­ä¼ªè¯ï¼åºå¯¹ä¸­ä¼¤ | references/capabilities/truth-rebuttal.md | references/capabilities/factual-rebuttal.mdãreferences/capabilities/contradiction-exposure.md |
-| åé©³æå¨åäººï¼ç ´é¤è¿·ä¿¡ï¼ä¸å®¶è´¨ç | references/capabilities/anti-authority-worship.md | references/capabilities/authority-relativity.md |
-| ä»¥å¶äººä¹éè¿æ²»å¶äººä¹èº«ï¼åè®½åå»ï¼è®©è°¬è¯´èªé£å¶æ | references/capabilities/return-folly.md | references/capabilities/reductio-absurdum.md |
-| åæç« èªæ¥ï¼åè¨åæ£æ¥ï¼é²èªå·±ç¯é»è¾éè¯¯ï¼è®ºè¯è´¨éèªæ£ | references/capabilities/self-defense-checklist.md | references/capabilities/evidence-triple-check.mdãreferences/capabilities/thesis-identity.md |
+| 识别诡辩；分析对话逻辑；学习辩论；学习反驳；话术分析；逻辑谬误识别 | references/capabilities/gui-bian-yu-fan-bo-debate-coach.md | — |
+| 识别诡辩；判断是否在诡辩；检测逻辑错误；广告话术分析；舆论话术识别 | references/capabilities/sophistry-detection.md | references/capabilities/argument-vs-reasoning.md |
+| 破解套话；识别陷阱问题；应对记者提问；应对审讯式提问；不中圈套 | references/capabilities/complex-question-defense.md | references/capabilities/transference.md、references/capabilities/excluded-middle.md |
+| 论证质量评估；检查论点是否成立；审稿；决策前验证；评估别人说法靠不靠谱 | references/capabilities/evidence-triple-check.md | references/capabilities/evidence-truth.md、references/capabilities/evidence-relevance.md、references/capabilities/evidence-sufficiency.md |
+| 应对人身攻击；网络论战；避免被带偏；情绪话术免疫；反制谩骂 | references/capabilities/ad-hominem-immunity.md | references/capabilities/thesis-identity.md |
+| 揭露自相矛盾；应对前后不一；抓逻辑漏洞；反驳矛盾言论 | references/capabilities/contradiction-exposure.md | references/capabilities/contradiction-scan.md、references/capabilities/truth-rebuttal.md |
+| 构造两难；辩论杀手锏；谈判钳制；将死对方；设置进退两难 | references/capabilities/dilemma-construction.md | references/capabilities/reductio-absurdum.md、references/capabilities/excluded-middle.md |
+| 用归谬反驳；以荒谬证荒谬；高段位怼人；引申反驳；阴阳怪气反击 | references/capabilities/reductio-absurdum.md | references/capabilities/return-folly.md、references/capabilities/dilemma-construction.md |
+| 实战陪练；辩论练习；识别练习；反驳练习；考考我；来练练；场景演练 | references/capabilities/sparring-mode.md | references/capabilities/sophistry-detection.md |
+| 选择审查标准；判断论证还是推理 | references/capabilities/argument-vs-reasoning.md | references/capabilities/sophistry-detection.md |
+| 终止词义之争；判断说法是否同一；拆穿咬文嚼字 | references/capabilities/fact-adjudicates-language.md | references/capabilities/concept-identity.md |
+| 识别断章取义；检查语境越界；引用核查 | references/capabilities/context-guard.md | references/capabilities/thesis-identity.md |
+| 识别偷换概念；检查概念漂移；四概念排查 | references/capabilities/concept-identity.md | references/capabilities/fact-adjudicates-language.md |
+| 识别偷换论题；拉回话题；会议控场；识别答非所问 | references/capabilities/thesis-identity.md | references/capabilities/concept-identity.md |
+| 发现自相矛盾；识别言行不一；审讯式追问 | references/capabilities/contradiction-scan.md | references/capabilities/contradiction-exposure.md |
+| 识别回避表态；逼对方表态；拆穿和稀泥 | references/capabilities/excluded-middle.md | references/capabilities/dilemma-construction.md |
+| 检查论据真假；识别循环论证；识别先验理由；识别伪证 | references/capabilities/evidence-truth.md | references/capabilities/evidence-triple-check.md |
+| 检查论证相关性；识别无关推论；识别强为因果 | references/capabilities/evidence-relevance.md | references/capabilities/evidence-triple-check.md |
+| 识别以偏概全；检查样本代表性；防单一案例 | references/capabilities/evidence-sufficiency.md | references/capabilities/evidence-triple-check.md |
+| 核查权威引用；识别滥用权威；专家说法验证 | references/capabilities/authority-relativity.md | references/capabilities/anti-authority-worship.md |
+| 识别煽情话术；防情绪绑架；理性购物；识别以情代证 | references/capabilities/emotion-logic-separation.md | references/capabilities/ad-hominem-immunity.md |
+| 识别不当类比；拆穿比喻论证；类比检查 | references/capabilities/analogy-metaphor-check.md | references/capabilities/analogy-rebuttal.md、references/capabilities/metaphor-rebuttal.md |
+| 揭露混淆；澄清概念；拆解歧义 | references/capabilities/distinction-method.md | references/capabilities/concept-identity.md |
+| 巧妙应答；借题发挥；不中套作答；反客为主 | references/capabilities/transference.md | references/capabilities/complex-question-defense.md |
+| 语言反击；巧用歧义；修辞反驳 | references/capabilities/words-as-weapon.md | references/capabilities/fact-adjudicates-language.md |
+| 拆解复杂论断；分而治之反驳；多维分析 | references/capabilities/dissection.md | references/capabilities/comparison.md、references/capabilities/evidence-triple-check.md |
+| 对比反驳；用参照物说服；显差别 | references/capabilities/comparison.md | references/capabilities/factual-rebuttal.md |
+| 类比反驳；反类比；同类推谬 | references/capabilities/analogy-rebuttal.md | references/capabilities/analogy-metaphor-check.md |
+| 用比喻反驳；诱问式反驳；说服固执者 | references/capabilities/metaphor-rebuttal.md | references/capabilities/analogy-rebuttal.md、references/capabilities/analogy-metaphor-check.md |
+| 用事实反驳；摆事实；证据驳斥 | references/capabilities/factual-rebuttal.md | references/capabilities/truth-rebuttal.md |
+| 当场演示反驳；行为证明；抓行为作据 | references/capabilities/behavioral-rebuttal.md | references/capabilities/factual-rebuttal.md |
+| 辟谣；自证清白；揭伪证；应对中伤 | references/capabilities/truth-rebuttal.md | references/capabilities/factual-rebuttal.md、references/capabilities/contradiction-exposure.md |
+| 反驳权威压人；破除迷信；专家质疑 | references/capabilities/anti-authority-worship.md | references/capabilities/authority-relativity.md |
+| 以其人之道还治其人之身；反讽反击；让谬说自食其果 | references/capabilities/return-folly.md | references/capabilities/reductio-absurdum.md |
+| 写文章自查；发言前检查；防自己犯逻辑错误；论证质量自检 | references/capabilities/self-defense-checklist.md | references/capabilities/evidence-triple-check.md、references/capabilities/thesis-identity.md |
 
-**éè½åç±»æ¥è¯¢**ï¼
-- ä¹¦å/ä½è/ç« è/æ´ä¹¦æ¦è§ â references/overview.md
-- æ¯è¯­è§£é â references/glossary.md
-- å³ç­è§åéæ¥ï¼ä¸éè¦åæä¾æ®æ¶ï¼ â references/cheatsheet.md
-- å®æ´æå¾ä¸å³é®è¯ç´¢å¼ï¼æ¬è¡¨æªè¦ççæå¾åæ¥è¿éï¼ â references/capability-index.md
+**非能力类查询**：
+- 书名/作者/章节/整书概览 → references/overview.md
+- 术语解释 → references/glossary.md
+- 决策规则速查（不需要原文依据时） → references/cheatsheet.md
+- 完整意图与关键词索引（本表未覆盖的意图先查这里） → references/capability-index.md
 
-## å è½½è§å
+## 加载规则
 
-- æ¯æ¬¡ä»»å¡åè¯»æ¬æä»¶ï¼åæè·¯ç±è¡¨å è½½ **1** å¼ è½åå¡ï¼ä»»å¡æç¡®è·¨åæ¶æå¤å è½½ 2 å¼ ã
-- æ¦è§/ä¹¦åç±»é®é¢ä¸å è½½è½åå¡ï¼ç¨ãæ ¸å¿ååãä¸ overview.md åç­ã
-- è·¯ç±è¡¨ä¸ capability-index.md é½æ æ³å½ä¸­çæå¾ï¼æç¡®åç¥è¶åºæ¬ä¹¦èå´ï¼ä¸è¦ç¡¬å¥ã
+- 每次任务先读本文件，再按路由表加载 **1** 张能力卡；任务明确跨域时最多加载 2 张。
+- 概览/书名类问题不加载能力卡，用「核心原则」与 overview.md 回答。
+- 路由表与 capability-index.md 都无法命中的意图，明确告知超出本书范围，不要硬套。
 
-## è¾¹çä¸å¤å
+## 边界与判停
 
-- è¯å«ä¸åºè¯¡è¾©ææ³æ¶ï¼å¦å®è¯´æ"æªåç°ææ¾è¯¡è¾©ç»æ"ï¼ä¸ç¡¬å¥ç½ªå
-- å¯¹æ¹å®å¨æç»è®²çï¼æå/å©çç¢¾åï¼ï¼åæ­¢è¾©è®ºå¹¶æ­¢æï¼ä¸åçº ç»è¾èµ¢
-- å½çº³ä¸º"ä¸å¯è¯´æè"çåºæ¯ï¼æ è®°åç»æ­¢ï¼ä¸ææ
-- æ¶åä¸ä¸æ³å¾/å»å­¦/ææ¯è£å³æ¶ï¼æç¤ºè½¬ä¸ä¸äººå£«ï¼æ¬ä¹¦åªåé»è¾å±é¢åæ
+- 识别不出诡辩手法时：如实说明"未发现明显诡辩结构"，不硬套罪名
+- 对方完全拒绝讲理（权力/利益碾压）：停止辩论并止损，不再纠结输赢
+- 归纳为"不可说服者"的场景：标记后终止，不恋战
+- 涉及专业法律/医学/技术裁决时：提示转专业人士，本书只做逻辑层面分析
