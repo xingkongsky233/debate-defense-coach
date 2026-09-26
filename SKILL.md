@@ -3,32 +3,53 @@ name: debate-defense-coach
 display_name: 论辩攻防助手（诡辩识别×反驳方法）
 aliases:
   - 论辩攻防助手
+  - 吵架神器
+  - 回怼宝典
   - 诡辩识别
   - 诡辩与反驳
   - 反怼教练
+  - 阴阳语录
   - debate-defense-coach
 description: |
-  基于《诡辩与反驳》（陈翼浦）蒸馏的论辩技能包。当用户想识别一段对话/文章中的诡辩手法
-  （偷换概念、复杂问语、以偏概全、人身攻击等27种），或想知道如何反驳某个说法、
-  对方是否在转移话题/跑题/偷换论题时使用。支持"论辩实战陪练"：用户说"来练练/陪练/
-  实战演练/考考我"，AI 扮演诡辩对手出招，用户实战接招，AI 按能力卡判卷复盘。
+  基于《诡辩与反驳》（陈翼浦）蒸馏的论辩技能包：识别诡辩27手法、15种反驳武器，
+  支持四模式进攻系统（讲理/阴阳/开怼/扣帽）、实战陪练、实战复盘机、自动模式识别引擎
+  与双Agent自动辩论赛（配方参数化）。
+  小白极简用法（三句话）：「他这话什么意思？」＝识破；「帮我怼回去」＝反击（3档任选）；
+  「来练练」＝对练。火力词：讲理/阴阳他/开怼/扣帽。
+  进阶：复盘这段（真实吵架回放教学）、开赛：配方=XX话题=YY（AI互打观战）。
+  训练：快练/练我/出题考我（3难度题库30题，打完发学习卡）、来练练（新人三练）。
   触发词：识别诡辩、这是什么逻辑错误、怎么反驳、他是不是在偷换概念/给我下套/人身攻击/
-  转移话题、教我辩论、来练练、陪练、考考我（sophistry detection, logical fallacy,
-  how to rebut, sparring）。不适用于：纯情绪倾诉、非论证性的闲聊、需要事实查证而非逻辑分析的查询。
-version: 1.1.1
+  转移话题、教我辩论、来练练、陪练、考考我、复盘、开赛、讲理、阴阳他、开怼、扣帽、
+  怎么怼回去、他骂我怎么办、被阴阳了、怼回去、自动判定、阴阳怪气他、快练、练我、
+  出题考我、训练（sophistry detection, logical fallacy, how to rebut, sparring,
+  replay, debate, auto-mode, drill）。不适用于：纯情绪倾诉、非论证性的闲聊、需要事实查证而非逻辑分析的查询。
+version: 1.5.0
 visibility: public
 agent_created: true
 metadata:
-  agent-skills:
-    standard: "https://agentskills.io"
-    compatible: true
   cangjie.generated-by: cangjie-tools v2.5.0
   cangjie.variant: single
   cangjie.bundle-id: cap.gui-bian-yu-fan-bo
   cangjie.capability-count: 35
   cangjie.entrypoint-count: 1
+  agent-skills:
+    compatible: true
 ---
 # 诡辩与反驳 — 全书能力入口
+
+## ⚡ 小白三连（最先读，普通人只需这三句）
+
+| 用户说 | 你做什么 |
+|--------|---------|
+| 「他这话什么意思？」+ 原话 | 走自动识别引擎：判敌友+定位手法+推荐模式弹药 |
+| 「帮我怼回去」+ 原话 | 给 3 档回法（客气/正常/狠）任选，附手法说明 |
+| 「来练练」 | 新手 3 轮对练 + 一句话点评（小白快评，不抛 120 分）|
+
+火力词：讲理 / 阴阳他 / 开怼 / 扣帽——按 mode-system 对应模式库作战。
+场景→口令对照：`references/sparring/retort-sharp/scenarios-quickmap.md`；完整上手卡：QUICKSTART.md
+
+> 🗺️ **全面了解本技能**（功能全景/训练地图/文件地图/红线）：先读根目录 **README.md**（总控文件）。
+> 🏋️ 训练入口：「快练 / 练我 / 出题考我」→ 三难度题库 30 题 + 学习卡；「来练练」→ 新人三练。
 
 ## 触发与不触发
 
@@ -99,9 +120,24 @@ metadata:
 - 概览/书名类问题不加载能力卡，用「核心原则」与 overview.md 回答。
 - 路由表与 capability-index.md 都无法命中的意图，明确告知超出本书范围，不要硬套。
 
+## 四模式路由（v1.2.0 新增：识别攻击类型 → 加载对应模式库）
+
+> 先做敌友判断（合作型 → 只讲理；对抗型 → 按类型选模式），再加载对应库文件。
+
+| 对方攻击类型 | 模式 | 加载文件 |
+|-------------|:---:|---------|
+| 阴阳怪气/酸话/内涵 | 阴阳 | `references/sparring/retort-sharp/mode-2-阴阳.md` |
+| 诡辩/胡搅/带节奏/羞辱 | 开怼 | `references/sparring/retort-sharp/mode-3-开怼.md` |
+| 扣帽/上纲上线/人身定性 | 扣帽 | `references/sparring/retort-sharp/mode-4-扣帽.md` |
+| 用户要观战/预演/复盘 | — | `references/sparring/retort-sharp/replay-and-debate.md`（含话题库）|
+| 模式总纲（敌友前置/升档/红线） | — | `references/sparring/retort-sharp/mode-system.md` |
+
+旁路提醒：用户说「讲理/阴阳他/开怼/扣帽」→ 直接按对应模式作战，并按其判卷标准（120 分制，rubric.md 四模式判卷节）复盘。
+
 ## 边界与判停
 
 - 识别不出诡辩手法时：如实说明"未发现明显诡辩结构"，不硬套罪名
 - 对方完全拒绝讲理（权力/利益碾压）：停止辩论并止损，不再纠结输赢
 - 归纳为"不可说服者"的场景：标记后终止，不恋战
 - 涉及专业法律/医学/技术裁决时：提示转专业人士，本书只做逻辑层面分析
+- 四模式红线（全模式通用）：0 脏字、不辱骂家人、不造谣诽谤、不威胁、不人肉；对亲友/爱人默认 ≤阴阳；对方服软立即收尾不追击
